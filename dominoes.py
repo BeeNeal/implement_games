@@ -5,6 +5,7 @@ class Dominoes(object):
 # Intialize game with amt players
     def __init__(self, n_players):
         self.n_players = n_players
+        self.boneyard = self.build_boneyard()
 
 # Build this game's boneyard
     def build_boneyard(self):
@@ -24,11 +25,11 @@ class Dominoes(object):
 # add players to game
     def add_players(self):
         """ """
-        players = []
+        self.players = []
         for p in range(self.n_players):
             name = raw_input("What's your name, player {}?".format(p))
             self.players.append(Player(name))
-        return players
+        return self.players
 
 def remove_bones_from_boneyard(bones, boneyard):
     """Takes in set of bones, removes these bones from boneyard"""
@@ -70,5 +71,13 @@ game.build_boneyard()
 game.add_players()
 
 # Running Qs
-# How should I connect this specific game with # players to this specific player?
-# How do I make sure a function is always called
+# How should I connect this specific game with # players to this set of players?
+
+# Should I build boneyard in the class as method, or have as outside function
+#   violates encapsulation 
+
+# if had a DB for this would need tables: GAMES (ID Serialized, boneyard, # players)
+# 
+# PLAYERS( ID, name)
+
+# In game, would have boneyard - would never need this outside game
