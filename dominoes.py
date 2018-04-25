@@ -31,12 +31,6 @@ class Dominoes(object):
             self.players.append(Player(name))
         return self.players
 
-def remove_bones_from_boneyard(bones, boneyard):
-    """Takes in set of bones, removes these bones from boneyard"""
-
-    boneyard = boneyard - bones
-    return boneyard
-
 
 # def create_player(n_players, boneyard):
 
@@ -46,11 +40,18 @@ def remove_bones_from_boneyard(bones, boneyard):
 
 class Player(object):
 
-    def __init__(self, name, first=False):
+    def __init__(self, name):
         # self.bones = bones
         self.name = name
-        self.first = first
+        self.first = False
+        self.score = 0
 
+    def remove_bones_from_boneyard(self, bones, boneyard):
+        """Takes in set of bones, removes these bones from boneyard"""
+
+        boneyard = boneyard - bones
+        return boneyard
+        
     def assign_bones(self, n_players, boneyard):
         """Assigns bones from boneyard, amount dependent on number of players"""
 
@@ -59,6 +60,8 @@ class Player(object):
         remove_bones_from_boneyard(personal_bones, boneyard)
 
         self.bones = personal_bones
+
+
 
     def is_first(self):
         if (6, 6) in self.bones:
@@ -69,6 +72,22 @@ class Player(object):
 game = Dominoes(4)
 game.build_boneyard()
 game.add_players()
+# is there a good way to check if an item is in a list of sets w/o checking all
+ # of the<m? - should probably put the 'who starts' method on the game,
+ # not the player, and have separate (is_first) on player
+
+# How to construct the actual game
+# the board has to be a 2d array, even with excess space
+
+                # [(4, 6)(6, 6)]
+# Can have a LL, with pointers to the head and tail! all in the center don't 
+# matter once they've been played off of
+# player allowed to place at head or tail
+        # can have so first elem of first array and last element of array
+
+
+
+
 
 # Running Qs
 # How should I connect this specific game with # players to this set of players?
@@ -80,4 +99,6 @@ game.add_players()
 # 
 # PLAYERS( ID, name)
 
-# In game, would have boneyard - would never need this outside game
+#ask:
+    # how to interact with a different class in a class? eg: need to modify game
+    # boneyard from player class's method
